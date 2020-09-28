@@ -5,8 +5,7 @@ services:
 before_install:
     - docker build -t righthous8/react-test -f ./client/Dockerfile.dev ./client
 script: 
-    - docker run   -e CI=true righthouse8/react-test npm test
-
+    - docker run   -e CI=true righthouse8/react-test npm run test
 language: generic     
 
 after_sucess:
