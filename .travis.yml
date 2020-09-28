@@ -19,3 +19,15 @@ after_sucess:
     - docker push righthouse8/multi-nginx  
     - docker push righthouse8/multi-server
     - docker push righthouse8/multi-worker
+
+deploy: 
+    provider: elasticbeanstalk
+    region: ca-central-1
+    app: multi-docker
+    env: MultiDocker-env
+    bucket_name: elasticbeanstalk-ca-central-1-679958030430
+    bucket_path: docker-multi
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY    
