@@ -16,6 +16,6 @@ after_sucess:
     - docker build -t righthouse8/multi-worker ./worker
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     - docker push righthouse8/multi-client
-    - docker push righthouse8/multi-nginx ./nginx
+    - docker push righthouse8/multi-nginx  
     - docker push righthouse8/multi-server
     - docker push righthouse8/multi-worker
