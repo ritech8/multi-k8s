@@ -1,0 +1,21 @@
+sudo: required
+services: 
+    - docker
+
+before_install:
+    - docker build -t righthous8/react-test -f ./client/Dockerfile.dev ./client
+script: 
+    - docker run   -e CI=true righthouse8/react-test npm test
+
+language: generic     
+
+after_sucess:
+    - docker build -t righthouse8/multi-client ./client
+    - docker build -t righthouse8/multi-nginx ./nginx
+    - docker build -t righthouse8/multi-server ./server
+    - docker build -t righthouse8/multi-worker ./worker
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    - docker push righthouse8/multi-client
+    - docker push righthouse8/multi-nginx ./nginx
+    - docker push righthouse8/multi-server
+    - docker push righthouse8/multi-worker
